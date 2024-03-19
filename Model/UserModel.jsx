@@ -17,10 +17,7 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
     },
-    phoneNumber: {
-        type: Number,
-        required: true,
-    },
+   
     bolckStatus: {
         type: Boolean,
         required: true,
