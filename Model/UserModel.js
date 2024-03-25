@@ -6,26 +6,20 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
     email: {
-        type: Strng,
+        type: String,
         required: true,
     },
     password: {
-        type: Strng,
+        type: String,
         required: true, 
     },
-    verified: {
-        type: Boolean,
-        required: true,
-    },
+   
    
     bolckStatus: {
         type: Boolean,
         required: true,
     },
-    image: {
-        
-        required: Object,
-    },
+ 
 });
 userSchema.pre("save",async function(next){
     const salt = await bcrypt.genSalt();
