@@ -1,4 +1,5 @@
 const express = require("express");
+
 const cors = require("cors");
 const dbConnection = require("./Configure/dbconnection");
 const app = express();
@@ -7,7 +8,7 @@ const UserRoutes=require('../backend/Routes/UserRoutes')
 dbConnection.dbConnect();
 app.use(cors())
 app.use(express.json())
-
+app.use(cors())
 app.use("/",UserRoutes)
 
 // app.use('/admin',AdminRouter);
