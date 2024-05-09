@@ -9,7 +9,7 @@ dbConnection.dbConnect();
 app.use(cors());
 app.use(express.json());
 app.use("/", UserRoutes);
-//app.use('/admin',AdminRoutes);
+app.use('/admin',AdminRoutes);
 const PORT = 8000;
 app.listen(PORT, () =>{
     console.log(`server started at port ${PORT}`)

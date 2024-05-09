@@ -1,10 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt")
 const adminSchema = new mongoose.Schema({
-    userName:{
-        type: String,
-        required: true,
-    },
+    
     email: {
         type: String,
         required: true,
@@ -15,10 +12,7 @@ const adminSchema = new mongoose.Schema({
     },
    
    
-    bolckStatus: {
-        type: Boolean,
-        default: false,
-    },
+   
  
 });
 adminSchema.pre("save",async function(next){
