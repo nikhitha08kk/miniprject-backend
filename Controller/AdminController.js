@@ -1,5 +1,6 @@
 const AdminModel = require('../Model/AdminModel');
 const jwt = require("jsonwebtoken");
+const UserModel=require('../Model/UserModel')
 const bcrypt = require("bcrypt");
 const maxAge = 3*24*60*60
 
@@ -61,3 +62,20 @@ module.exports.Login = async (req, res, next) => {
     }
   
 };
+module.exports.userList = async (req, res, next) => {
+    try{
+      const data = await UserModel.find();
+  
+      res.json({
+        message: "User list fetched",
+        status: true,
+        UserList: data,
+      });
+    } catch (error) {
+      console.log(error);
+      res.json({
+        message: "Internal server error in userlist",
+        status: false,
+      });
+    }
+  };

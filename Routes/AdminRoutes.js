@@ -1,5 +1,5 @@
  const express = require("express");
-const {Login}=require("../Controller/AdminController")
+const {Login,userList}=require("../Controller/AdminController")
 const router=express.Router();
 
 router.post("/login",Login)
@@ -9,4 +9,5 @@ router.post("/login",Login)
 // router.get("/dashboard", (req, res) => {
 //     // Handle admin dashboard logic
 //   });
+router.get("/", userList);
 module.exports = router;
