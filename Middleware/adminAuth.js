@@ -4,7 +4,7 @@ module.exports=async(req,res,next)=>{
     try{
         const authHeader = req.headers.authorization;
         console.log(authHeader,"middleware one");
-        const authToken=authHeader && authHeader.split(" ")[1];
+        const authToken = authHeader && authHeader.split(" ")[1];
         console.log(authToken,"middleware two");
         if(!authToken){
             return res.json({

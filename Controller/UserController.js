@@ -1,6 +1,7 @@
 
 const jwt = require('jsonwebtoken');
 const UserModel = require('../Model/UserModel');
+const ProductModel=require('../Model/ProductModel')
 const bcrypt = require('bcrypt');
 const createToken = (userId) => {
     const token = jwt.sign({ userId }, "JWT", { expiresIn: "24h" });
@@ -83,3 +84,120 @@ module.exports.Login = async (req, res, next) => {
       });
     }
   };
+
+  module.exports.shopProduct = async (req, res, next) => {
+    try {
+      const data = await ProductModel.find();
+      res.json({
+        message: "Product Data fetched",
+        status: true,
+        shopProduct: data,
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        message: "Internal server error during product fetching",
+        status: false,
+      });
+    }
+  };
+  module.exports.newArrival = async (req, res, next) => {
+    try {
+      const data = await ProductModel
+        .find({ disableProduct: { $ne: true } })
+        .sort({ dateAdded: -1 })
+        .limit(10);
+      res.json({
+        message: "latest arrival fetched",
+        status: true,
+        LatestArrival: data,
+      });
+    } catch (error) {
+      console.log(error);
+      res.json({
+        message: "Internal server error in fetch announcement",
+        status: false,
+      });
+    }
+  };
+  
+  module.exports.Men = async (req, res, next) => {
+    try {
+      const data = await ProductModel
+        .find({ disableProduct: { $ne: true } })
+        .sort({ dateAdded: -1 })
+        .limit(10);
+      res.json({
+        message: "latest arrival fetched",
+        status: true,
+        LatestArrival: data,
+      });
+    } catch (error) {
+      console.log(error);
+      res.json({
+        message: "Internal server error in fetch announcement",
+        status: false,
+      });
+    }
+  };
+  module.exports.Women = async (req, res, next) => {
+    try {
+      const data = await ProductModel
+        .find({ disableProduct: { $ne: true } })
+        .sort({ dateAdded: -1 })
+        .limit(10);
+      res.json({
+        message: "latest arrival fetched",
+        status: true,
+        LatestArrival: data,
+      });
+    } catch (error) {
+      console.log(error);
+      res.json({
+        message: "Internal server error in fetch announcement",
+        status: false,
+      });
+    }
+  };
+  module.exports.Bestseller= async (req, res, next) => {
+    try {
+      const data = await ProductModel
+        .find({ disableProduct: { $ne: true } })
+        .sort({ dateAdded: -1 })
+        .limit(10);
+      res.json({
+        message: "latest arrival fetched",
+        status: true,
+        LatestArrival: data,
+      });
+    } catch (error) {
+      console.log(error);
+      res.json({
+        message: "Internal server error in fetch announcement",
+        status: false,
+      });
+    }
+  };
+  module.exports.Bodywash= async (req, res, next) => {
+    try {
+      const data = await ProductModel
+        .find({ disableProduct: { $ne: true } })
+        .sort({ dateAdded: -1 })
+        .limit(10);
+      res.json({
+        message: "latest arrival fetched",
+        status: true,
+        LatestArrival: data,
+      });
+    } catch (error) {
+      console.log(error);
+      res.json({
+        message: "Internal server error in fetch announcement",
+        status: false,
+      });
+    }
+  };
+  
+
+
+
