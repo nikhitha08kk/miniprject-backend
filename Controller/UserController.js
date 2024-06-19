@@ -271,3 +271,65 @@ module.exports.postReviews = async (req, res) => {
     });
   }
 };
+
+module.exports.AddToWishlist = async (req, res) => {
+  try {
+    const { productId } = req.body;
+    const product = await ProductModel.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({
+        message: "Product not found",
+      });
+    }
+
+    const user = await UserModel.findById(req.user._id);
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    if (user.wishlist.includes(productId)) {
+      // Remove product from wishlist
+      user.wishlist = user.wishlist.filter((id) => id.toString() !== productId);
+      await user.save();
+      return res.status(201).json({
+        message: "Product removed from wishlist",
+      });
+    } else {
+      // Add product to wishlist
+      user.wishlist.push(productId);
+      await user.save();
+      return res.status(200).json({
+        message: "Product added to wishlist",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: "Server error",
+    });
+  }
+};
+
+module.exports.checkWislist = async (req, res) => {
+  try {
+    const { productId } = req.params;
+    const user = await UserModel.findById(req.user._id);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    const isInWishlist = user.wishlist.includes(productId);
+    res.status(200).json({
+      inWishlist: isInWishlist,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Server error",
+    });
+  }
+};

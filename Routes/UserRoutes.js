@@ -14,7 +14,9 @@ const { Signup,
     userStatus,
     getUser,
     getReviews,
-    postReviews } = require("../Controller/UserController");
+    postReviews, 
+    AddToWishlist,
+    checkWislist,} = require("../Controller/UserController");
 const userAuth = require("../Middleware/userAuth")
 //get
 router.get('/shop/Newarrival', newArrival)
@@ -30,13 +32,14 @@ router.get('/example', (req, res) => {
     res.send('Hello World');
 });
 router.get("/reviews/:productId", getReviews);
+router.get("/wishlist/check/:productId",checkWislist)
 // router.get('/',userAuth)
 
 //post
 router.post('/signup', Signup)
 router.post('/login', Login);
 router.post("/reviews/create", postReviews);
-
+router.post("/wishlist",AddToWishlist)
 
 
 // router.post("/createorder",createOrder);
