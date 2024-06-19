@@ -1,36 +1,50 @@
-// const express = require ("express");
-// const { Signup, Login, Newarrivals, Bestseller, Men, Women, Bodywash } = require("../Controller/UserController");
-// const router = express.Router();
-// // const userAuth = require("../Middleware/userAuth")
-// router.get('/',userAuth)
-// router.post('/signup',Signup);
-// router.post('/login',Login);
-// router.get('/newarrival',Newarrivals);
-// router.get('/bestseller',Bestseller);
-// router.get('/men',Men);
-// router.get('/women',Women);
-// router.get('/bodywash',Bodywash);
-// module.exports=router;
+
+
 const express = require('express');
 const router = express.Router();
-const { Signup, Login,newArrival,shopProduct,Bestseller,Men,Women,Bodywash} = require("../Controller/UserController");
+const { Signup,
+    Login,
+    newArrival,
+    bestseller,
+    men,
+    women,
+    bodybath,
+    shopProduct,
+    productDetails,
+    userStatus,
+    getUser,
+    getReviews,
+    postReviews } = require("../Controller/UserController");
 const userAuth = require("../Middleware/userAuth")
-router.get('/Newarrival',newArrival)
-router.get('/bestseller',Bestseller)
-router.get('/men',Men);
-router.get('/women',Women);
-router.get('/bodywash',Bodywash);
-router.get('/',userAuth)
-router.post('/signup',Signup)
-router.post('/login',Login);
-
-
-router.get('/shop',shopProduct)
-
-
-// Example of a route
+//get
+router.get('/shop/Newarrival', newArrival)
+router.get('/bestseller', bestseller)
+router.get('/men', men);
+router.get('/women', women);
+router.get('/bodybath', bodybath);
+router.get('/auth/status', userStatus)
+router.get('/user/:id', getUser)
+router.get('/shop/:id', productDetails);
+router.get('/shop', shopProduct)
 router.get('/example', (req, res) => {
     res.send('Hello World');
 });
+router.get("/reviews/:productId", getReviews);
+// router.get('/',userAuth)
+
+//post
+router.post('/signup', Signup)
+router.post('/login', Login);
+router.post("/reviews/create", postReviews);
+
+
+
+// router.post("/createorder",createOrder);
+;
+// router.get("/auth/status", userStatus);
+// router.get("/user", getUser);
+// router.get("/",featuredProducts);
+// Example of a route
+
 
 module.exports = router;

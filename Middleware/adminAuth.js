@@ -13,8 +13,8 @@ module.exports=async(req,res,next)=>{
                 message:"No auth token",
             });
         }
-        const decode = jwt.verify(authToken,"JWT");
-        const admin= await AdminModel.findOne({_id: decode.id});
+        const decode = jwt.verify(authToken,"adminjwt");
+        const admin= await AdminModel.findOne({_id: decode.adminId});
         if(!admin){
             return res.json({
                 message:"unauthorized access",

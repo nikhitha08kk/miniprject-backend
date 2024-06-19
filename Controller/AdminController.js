@@ -82,54 +82,20 @@ exports.removeUser = async (req, res) => {
   }
 };
 
+module.exports.deleteProduct = async (req, res) => {
+  try {
+    const { productId } = req.params;
+    await ProductModel.findByIdAndDelete(productId);
+    res.status(200).json({ message: "Product removed successfully", status: true });
+  } catch (error) {
+    console.error("Error removing user:", error);
+    res.status(500).json({ message: "Internal server error", status: false });
+  }
+};
 
 
 
-// module.exports.AddProducts = async (req, res) => {
-//   // Validate request
-//   // const errors = validationResult(req);
-//   // if (!errors.isEmpty()) {
-//   //   return res.status(400).json({ errors: errors.array() });
-//   // }
 
-//   const { name, description, price, category } = req.body;
-
-//   // Check if essential fields are provided
-//   if (!name || !description || !price || !category) {
-//     return res.status(400).json({ errors: [{ msg: 'Please provide all required fields' }] });
-//   }
-
-//   try {
-//     // Create a new product instance using the Product model
-//     const product = new ProductModel({
-//       name,
-//       description,
-//       price,
-//       category,
-//     });
-
-//     // Save the product to the database
-//     await product.save();
-
-//     res.status(201).json({ message: 'Product created successfully', product }); // Return the created product
-//   } catch (error) {
-//     console.error(`Error: ${error.message}`);
-//     res.status(500).json({ message: 'Server Error', error: error.message });
-//   }
-// };
-
-// module.exports.AddProduct =async (req,res)=>{
-//   try {
-//       const { prod_name, price, description,image,category}=req.body;
-         
-//       const products=new Products({prod_name:prod_name ,price:price, description:description,image: image,category:category});
-//       await products.save();
-//       res.json({message:"product added successfully"});
-//   } catch (error) {
-//       res.status(400).json({error:error.message});
-      
-//   }
-// };
 module.exports.AddProducts= async (req, res) => {
   try {
     const { prod_name, price, description, image, category } = req.body;
